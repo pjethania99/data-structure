@@ -1,0 +1,48 @@
+#include<stdio.h>
+void split(int a[],int lb,int ub,int *pivot)
+{
+int down,upper,elt,t;
+elt=a[lb];
+down=lb;
+upper=ub;
+while(down<upper)
+{
+for(;a[down]<=elt && down<upper;down++);
+for(;a[upper]>elt;upper--);
+if(down<upper)
+{
+t=a[down];
+a[down]=a[upper];
+a[upper]=t;
+}
+}
+a[lb]=a[upper];
+a[upper]=elt;
+*pivot=upper;
+}
+void quick(int a[],int lb,int ub)
+{
+int pivot,i;
+if(lb<ub)
+{
+split(a,lb,ub,&pivot);
+quick(a,lb,pivot-1);
+quick(a,pivot+1,ub);
+}
+}
+void main()
+{
+int a[15],n,i;
+clrscr();
+printf("\n\n\t\tQUICK SORT USING DIVIDE & CONQUER TECHNIQUE\n\n");
+printf("\n\tEnter the No. of elt in the list : ");
+scanf("%d",&n);
+printf("\n\n\t\tEnter the Elements : ");
+for(i=0;i<n;i++)
+scanf("%d",&a[i]);
+quick(a,0,n-1);
+printf("\n\n\t\tSORTED LIST \n\n\t");
+for(i=0;i<n;i++,printf("\t"))
+printf("%d",a[i]);
+getch();
+}
