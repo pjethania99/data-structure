@@ -1,0 +1,113 @@
+#include stdio.h
+
+void sort(int a[],int n)
+
+{
+
+int i,j,t;
+
+for(i=0;i
+for(j=i+1;j
+if(a[i]>a[j])
+
+{
+
+t=a[i];
+
+a[i]=a[j];
+
+a[j]=t;
+
+}
+
+}
+
+int search(int a[],int low,int up,int key)
+
+{
+
+/* fn. to search an elt in the list using binary search*/
+
+int mid;
+
+if(low<=up)
+
+{
+
+mid=(low+up)/2;
+
+if(a[mid]==key)
+
+return mid;
+
+else if(a[mid]
+return(search(a,mid+1,up,key));
+
+else
+
+return(search(a,low,mid-1,key));
+
+}
+
+else
+
+return -1;
+
+}
+
+void main()
+
+{
+
+int n,i,j=0,a[15];
+
+clrscr();
+
+printf("\n\n\t\tSEARCHING AN ELEMENT USING BINARY SEARCH METHOD\n\n");
+
+printf("\n\tEnter the No. of Elements in the List : ");
+
+scanf("%d",&n);
+
+printf("\n\tEnter the Elements: ");
+
+for(i=0;i
+{
+
+scanf("%d",&a[i]);
+
+if(i>0 && a[i]
+}
+
+if(j)
+
+{
+
+printf("\n\n\tList Not In Sorted Order\n\n");
+
+sort(a,n);
+
+printf("\n\n\tLIST AFTER SORTING :\t");
+
+for(i=0;i
+printf("%d\t",a[i]);
+
+}
+
+printf("\n\n\tEnter the Key to Search : ");
+
+scanf("%d",&i);
+
+j=search(a,0,n-1,i);
+
+if(j==-1)
+
+printf("\n\tSearch Key %d not found ",i);
+
+else
+
+printf("\n\tSearch Key %d found at position %d",i,j+1);
+
+getch();
+
+}
