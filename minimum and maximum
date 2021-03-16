@@ -1,0 +1,37 @@
+#include<stdio.h>
+int minimum(int a[],int n)
+{
+int k;
+if(n==0)
+return a[0];
+else
+{
+k=minimum(a,n-1);
+return ( k<a[n] ? k : a[n]);
+}
+}
+int maximum(int a[],int n)
+{
+int k;
+if(n==0)
+return a[0];
+else
+{
+k=maximum(a,n-1);
+return ( k>a[n] ? k : a[n]);
+}
+}
+void main()
+{
+int n,a[10],i;
+clrscr();
+printf("\n\n\t\tPROGRAM TO FIND MINIMUM & MAXIMUM IN THE LIST\n\n");
+printf("\n\t\tEnter the no. of elements in the list : ");
+scanf("%d",&n);
+printf("\n\tEnter the Elements : \n\t");
+for(i=0;i<n;i++,printf("\t"))
+scanf("%d",&a[i]);
+printf("\n\n\t\tMINIMUM NUMBER IN THE LIST : %d",minimum(a,n-1));
+printf("\n\n\t\tMAXIMUM NUMBER IN THE LIST : %d",maximum(a,n-1));
+getch();
+}
