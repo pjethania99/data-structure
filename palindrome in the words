@@ -1,0 +1,38 @@
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+#include<ctype.h>
+void main()
+{
+char word[200],temp[100],temp2[100];
+int i,j,l,pos[10],count=0;
+clrscr();
+printf("\n\n\tPROGRAM TO COUNT THE NUMBER OF PALINDROME IN THE GIVE STRING\n\n");
+printf("\n\n\t\tENTER THE STRING : ");
+scanf("%[^\n]",word);
+printf("\n\n\t\tGIVEN WORD : %s",word);
+for(i=0;i<strlen(word);i++)
+{
+l=i;
+for(j=0;(!isspace(word[i])) && word[i]!='\0';j++,i++)
+temp[j]=word[i];
+temp[j]='\0';
+strcpy(temp2,temp);
+strrev(temp2);
+if(strcmp(temp,temp2)==0)
+pos[count++]=l;
+if(word[j]=='\0')
+break;
+}
+if(count)
+{
+printf("\n\n\tNumber of palindrome in the given string : %d",count);
+printf("\n\n\tThey occur in the following position(s) : \n\n");
+for(i=0;i<count;i++)
+printf("\t%d",pos[i]+1);
+}
+else
+printf("\n\nNO PALINDROME FOUND IN THE GIVEN STRING \n\n");
+getch();
+}
+ 
