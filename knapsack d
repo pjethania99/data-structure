@@ -1,0 +1,73 @@
+#include<stdio.h>
+#define MAX(a,b) a>b?a:b
+int v[20][20];
+struct KNAP
+{
+char item[15];
+int value;
+int weight;
+}bag[20];
+void knap(int n,int W)
+{
+int i,j;
+int t1,t2;
+for(i=0;i<=n;i++)
+v[i][0]=0; //making first col as zero
+for(i=0;i<=W;i++)
+v[0][i]=0; //making first row as zero
+for(i=1;i<=n;i++)
+for(j=1;j<=W;j++)
+{
+if(j<bag[i].weight)
+v[i][j]=v[i-1][j];
+else
+{
+t1= v[i-1][j];
+t2=v[i-1][j-bag[i].weight]+bag[i].value;
+v[i][j]=MAX(t1,t2);
+}
+}
+printf("\n\n\t\tVALUE MATRIX\n\n\t");
+for(i=0;i<=n;i++,printf("\n\t"))
+for(j=0;j<=W;j++,printf("\t"))
+printf("%d",v[i][j]);
+}
+void finditem(int n,int W)
+{
+int i,j;
+printf("\n\n\t\tITEM IN THE BAG\n\n");
+for(i=n,j=W;i!=0 && j!=0;i--)
+{
+if(v[i][j]!=v[i-1][j])
+{
+printf("\t%s",bag[i].item);
+j=j-bag[i].weight;
+}
+}
+}
+void main()
+{
+int n,i,j,W;
+clrscr();
+printf("\n\n\t\tKNAPSACK PROBLEM USING DYNAMIC PROGRAMMING\n\n");
+printf("\n\tEnter No. of Items : ");
+scanf("%d",&n);
+for(i=1;i<=n;i++)
+{
+fflush(stdin);
+printf("\n\tEnter the Item %d name : ",i);
+scanf("%s",bag[i].item);
+printf("\nEnter the Weight & Valus of %s : ",bag[i].item);
+scanf("%d%d",&bag[i].weight,&bag[i].value);
+}
+printf("\n\n\t\tEnter the Knapsack Capacity : ");
+scanf("%d",&W);
+clrscr();
+printf("\n\n\t\tINITIAL STATE OF THE PROBLEM\n");
+printf("\n\titem\tweight\tvalue\n\n");
+for(i=1;i<=n;i++)
+printf("\t%s\t%d\t%d\n",bag[i].item,bag[i].weight,bag[i].value);
+knap(n,W);
+finditem(n,W);
+getch();
+}
